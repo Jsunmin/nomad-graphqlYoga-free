@@ -1,0 +1,30 @@
+{
+    "name": "nomad-graphqlYoga-free",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "nodemon --exec npx babel-node index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Jsunmin/nomad-graphqlYoga-free.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Jsunmin/nomad-graphqlYoga-free/issues"
+    },
+    "homepage": "https://github.com/Jsunmin/nomad-graphqlYoga-free#readme",
+    "dependencies": {
+        "graphql-yoga": "^1.18.3"
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.12.1",
+        "@babel/core": "^7.12.3",
+        "@babel/node": "^7.12.6",
+        "@babel/preset-env": "^7.12.1",
+        "nodemon": "^2.0.6"
+    }
+}
