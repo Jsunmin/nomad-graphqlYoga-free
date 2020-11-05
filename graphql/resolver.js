@@ -1,18 +1,12 @@
-import { getMovies, getById, addMovie, deleteMovie } from "./db";
+import { getMovies, getMovie, getSuggestions } from "./db";
 
 
 // query를 resolve 하는 것 (해석?!)
 const resolver = {
     Query: {
-        movies: () => getMovies(), // arr 리턴
-        movie: (_, { id }) => {
-            // client에서 주는 params는 2번째 args부터..
-            return getById( id );
-        },
-    },
-    Mutation: {
-        addMovie: (_, { name, score }) => addMovie( name, score ),
-        deleteMovie: (_, { id }) => deleteMovie( id )
+        movies: (_, { limit, rating }) => getMovies(limit, rating), // arr 리턴
+        movie: (_, { id }) => getMovie(id),
+        suggestions: (_, { id }) => getSuggestions(id),
     }
 }
 
@@ -21,22 +15,28 @@ export default resolver;
 /*
 # Write your query or mutation here
 query {
-	movies {
-        name
-        score
-    } // 전체 쿼리
+	movies(limit: 10, rating: 6) {
+        id
+        rating
+    }
 }
-
 query {
-	movie(id: 0) {
-        name
-        score
-    } // 필터 쿼리
+    movie(id:23113) {
+        id
+        title
+    }
 }
+query {
+    movie(id:23113) {
+        id
+        title
+    }
+    suggestions(id:23113) {
+        title
+        rating
+    }
+} // REST API에서는 클라이언트에서 2번의 통신으로 가져온 데이터를, graphql을 통해 한번의 통신으로 2개의 쿼리를 가져올 수 있다.
 
-mutation {
-    deleteMovie(id: 5)
-}
 mutation {
     addMovie(name: "test", score: 999) { 
         name

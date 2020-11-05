@@ -1,49 +1,45 @@
-let movies = [{
-    id: 0,
-    name: 'Start Wars - The new one',
-    score: 28,
-}, {
-    id: 1,
-    name: 'Avengers - The new one',
-    score: 8,
-}, {
-    id: 2,
-    name: 'The Godfather I',
-    score: 12,
-}, {
-    id: 3,
-    name: 'HarryPorter III',
-    score: 18,
-}, {
-    id: 4,
-    name: 'Load of the Rings',
-    score: 23,
-}];
-// 이제는 기본적으로 query { people { name } } 으로 들어감
+import axios from 'axios';
+const BASE_URL = "https://yts.mx/api/v2/";
+const LIST_MOVIES_URL = `${BASE_URL}list_movies.json`;
+const MOVIE_DETAILS_URL = `${BASE_URL}movie_details.json`;
+const MOVIE_SUGGESTIONS_URL = `${BASE_URL}movie_suggestions.json`;
 
-export const getMovies = () => movies;
-
-export const getById = id => {
-    const filteredMovies = movies.filter(p => p.id === id);
-    return filteredMovies[0];
+export const getMovies = async (limit, rating) => {
+    const {
+        data: {
+            data: { movies }
+        }
+    } = await axios(LIST_MOVIES_URL, {
+        params: {
+            limit,
+            minimum_rating: rating,
+        }
+    });
+    return movies;
 }
 
-export const deleteMovie = id => {
-    const cleanedMovies = movies.filter(p => p.id !== id);
-    if ( cleanedMovies.length < movies.length ) {
-        movies = cleanedMovies;
-        return true;
-    } else {
-        return false;
-    }
+export const getMovie = async (id) => {
+    const {
+        data: {
+            data: { movie }
+        }
+    } = await axios(MOVIE_DETAILS_URL, {
+        params: {
+            movie_id: id,
+        }
+    });
+    return movie;
 }
 
-export const addMovie = (name, score) => {
-    const newMovie = {
-        id: movies.length,
-        name,
-        score,
-    };
-    movies.push( newMovie );
-    return newMovie;
+export const getSuggestions = async (id) => {
+    const {
+        data: {
+            data: { movies }
+        }
+    } = await axios(MOVIE_SUGGESTIONS_URL, {
+        params: {
+            movie_id: id,
+        }
+    });
+    return movies;
 }
