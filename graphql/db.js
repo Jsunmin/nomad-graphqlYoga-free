@@ -27,6 +27,6 @@ export const people = [{
 // 이제는 기본적으로 query { people { name } } 으로 들어감
 
 export const getById = id => {
-    const filteredPeople = people.filter(p => p.id === id);
+    const filteredPeople = people.filter(p => p.id === String(id));
     return filteredPeople[0];
 }

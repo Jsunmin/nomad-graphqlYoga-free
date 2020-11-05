@@ -2,13 +2,14 @@ import { GraphQLServer } from 'graphql-yoga';
 import resolvers from './graphql/resolver';
 
 const server = new GraphQLServer({
+    // schema: 사용자에게 보내거나 받을 data에 대한 정의 (data form 통신? 정의)
     typeDefs: 'graphql/schema.graphql',
+    // 요청을 처리(해석)하는 것 ~ query, mutation
     resolvers,
 });
 
 server.start(() => console.log('Graphql Server Running'));
 
-// schema: 사용자에게 보내거나 받을 data에 대한 정의
 // query: 클라이언트가 정보를 받는 것 ~ !는 필수 표시
 // mutation: 클라이언트가 정보를 변형하는 것
 
