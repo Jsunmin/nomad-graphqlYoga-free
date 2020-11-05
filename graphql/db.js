@@ -1,32 +1,49 @@
-export const people = [{
-    id: '0',
-    name: 'Sunmin',
-    age: 28,
-    gender: 'male',
+let movies = [{
+    id: 0,
+    name: 'Start Wars - The new one',
+    score: 28,
 }, {
-    id: '1',
-    name: 'Sunmin1',
-    age: 8,
-    gender: 'male',
+    id: 1,
+    name: 'Avengers - The new one',
+    score: 8,
 }, {
-    id: '2',
-    name: 'Sunmin2',
-    age: 12,
-    gender: 'male',
+    id: 2,
+    name: 'The Godfather I',
+    score: 12,
 }, {
-    id: '3',
-    name: 'Sunmin3',
-    age: 18,
-    gender: 'male',
+    id: 3,
+    name: 'HarryPorter III',
+    score: 18,
 }, {
-    id: '4',
-    name: 'Sunmin4',
-    age: 23,
-    gender: 'male',
+    id: 4,
+    name: 'Load of the Rings',
+    score: 23,
 }];
 // 이제는 기본적으로 query { people { name } } 으로 들어감
 
+export const getMovies = () => movies;
+
 export const getById = id => {
-    const filteredPeople = people.filter(p => p.id === String(id));
-    return filteredPeople[0];
+    const filteredMovies = movies.filter(p => p.id === id);
+    return filteredMovies[0];
+}
+
+export const deleteMovie = id => {
+    const cleanedMovies = movies.filter(p => p.id !== id);
+    if ( cleanedMovies.length < movies.length ) {
+        movies = cleanedMovies;
+        return true;
+    } else {
+        return false;
+    }
+}
+
+export const addMovie = (name, score) => {
+    const newMovie = {
+        id: movies.length,
+        name,
+        score,
+    };
+    movies.push( newMovie );
+    return newMovie;
 }
