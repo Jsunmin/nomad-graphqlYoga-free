@@ -18,8 +18,9 @@
     },
     "homepage": "https://github.com/Jsunmin/nomad-graphqlYoga-free#readme",
     "dependencies": {
+        "apollo-server": "^2.19.1",
         "axios": "^0.21.0",
-        "graphql-yoga": "^1.18.3"
+        "graphql": "^15.4.0"
     },
     "devDependencies": {
         "@babel/cli": "^7.12.1",

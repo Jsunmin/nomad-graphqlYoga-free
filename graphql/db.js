@@ -4,6 +4,21 @@ const LIST_MOVIES_URL = `${BASE_URL}list_movies.json`;
 const MOVIE_DETAILS_URL = `${BASE_URL}movie_details.json`;
 const MOVIE_SUGGESTIONS_URL = `${BASE_URL}movie_suggestions.json`;
 
+const dataForMutation = [];
+// mutation용
+export const addMovie = (title, rating) => {
+    const newMovie = {
+        id: dataForMutation.length,
+        title,
+        rating,
+        summary: 'this is dummy data!',
+        language: 'this is dummy data!',
+        medium_cover_image: 'this is dummy data!',
+    };
+    dataForMutation.push( newMovie );
+    console.log(dataForMutation)
+    return newMovie;
+}
 export const getMovies = async (limit, rating) => {
     const {
         data: {
@@ -15,7 +30,7 @@ export const getMovies = async (limit, rating) => {
             minimum_rating: rating,
         }
     });
-    return movies;
+    return [...dataForMutation, movies];
 }
 
 export const getMovie = async (id) => {

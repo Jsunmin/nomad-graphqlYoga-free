@@ -1,4 +1,4 @@
-import { getMovies, getMovie, getSuggestions } from "./db";
+import { getMovies, getMovie, getSuggestions, addMovie } from "./db";
 
 
 // query를 resolve 하는 것 (해석?!)
@@ -7,6 +7,9 @@ const resolver = {
         movies: (_, { limit, rating }) => getMovies(limit, rating), // arr 리턴
         movie: (_, { id }) => getMovie(id),
         suggestions: (_, { id }) => getSuggestions(id),
+    },
+    Mutation: {
+        addMovie: (_, { title, rating }) => addMovie( title, rating ),
     }
 }
 
