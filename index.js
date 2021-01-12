@@ -5,6 +5,12 @@ const server = new ApolloServer({
     // schema: 사용자에게 보내거나 받을 data에 대한 정의 (data form 통신? 정의)
     // typeDefs: 'graphql/schema.graphql',
     typeDefs: gql`
+        type Response {
+            code: String!
+            message: String!
+            movie: Movie!
+        }
+
         type Movie {
             id: Int!
             title: String!
@@ -18,10 +24,11 @@ const server = new ApolloServer({
             movies(limit: Int, rating: Float): [Movie]!
             movie(id: Int!): Movie!
             suggestions(id: Int!): [Movie]!
+            givemeError: String
         }
 
         type Mutation {
-            addMovie(title: String!, rating: Int!): Movie!
+            addMovie(title: String!, rating: Int!): Response!
         }
     `,
     // 요청을 처리(해석)하는 것 ~ query, mutation

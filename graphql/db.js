@@ -30,7 +30,7 @@ export const getMovies = async (limit, rating) => {
             minimum_rating: rating,
         }
     });
-    return [...dataForMutation, movies];
+    return [...dataForMutation, ...movies];
 }
 
 export const getMovie = async (id) => {
