@@ -1,17 +1,31 @@
 import { getMovies, getMovie, getSuggestions, addMovie } from "./db";
 
-
+interface SuccessResopnse {
+  code: String;
+  message: string;
+  movie: object;
+}
 // query를 resolve 하는 것 (해석?!)
 const resolver = {
-    Query: {
-        movies: (_, { limit, rating }) => getMovies(limit, rating), // arr 리턴
-        movie: (_, { id }) => getMovie(id),
-        suggestions: (_, { id }) => getSuggestions(id),
+  Query: {
+    movies: (_, { limit, rating }) => getMovies(limit, rating), // arr 리턴
+    movie: (_, { id }) => getMovie(id),
+    suggestions: (_, { id }) => getSuggestions(id),
+  },
+  Mutation: {
+    addMovie: function (_, { title, rating }) {
+      const newMovie = addMovie(title, rating);
+      if (newMovie) {
+        const res: SuccessResopnse = {
+          code: "200",
+          message: "new movie creation success",
+          movie: newMovie,
+        };
+        return res;
+      }
     },
-    Mutation: {
-        addMovie: (_, { title, rating }) => addMovie( title, rating ),
-    }
-}
+  },
+};
 
 export default resolver;
 

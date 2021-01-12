@@ -1,10 +1,10 @@
 {
-    "name": "nomad-graphqlYoga-free",
+    "name": "nomad-graphql-apollo",
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
     "scripts": {
-        "start": "nodemon --exec npx babel-node index.js"
+        "start": "nodemon --exec npx babel-node --extensions '.ts,.js' index.js"
     },
     "repository": {
         "type": "git",
@@ -27,6 +27,7 @@
         "@babel/core": "^7.12.3",
         "@babel/node": "^7.12.6",
         "@babel/preset-env": "^7.12.1",
+        "@babel/preset-typescript": "^7.12.7",
         "nodemon": "^2.0.6"
     }
 }
