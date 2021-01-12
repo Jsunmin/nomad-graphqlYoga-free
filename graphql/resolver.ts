@@ -1,27 +1,56 @@
 import { getMovies, getMovie, getSuggestions, addMovie } from "./db";
-
+import {
+  UserInputError,
+  AuthenticationError,
+  ApolloError,
+} from "apollo-server";
 interface SuccessResopnse {
-  code: String;
+  code: string;
   message: string;
   movie: object;
 }
 // query를 resolve 하는 것 (해석?!)
 const resolver = {
+  /* 총 4개의 인수 (parent, args, context, info)를 갖는데,
+    1, 해당 필드의 부모에 대한 반환값(리졸버 체인의 이전 단계)
+      ~ 스키마 내부 스키마 .. 이어지는 데이터 구조시, 체이닝이 일어남(부모 data == 상위 블록 data)
+    2, 필드에 제공된 모든 gql 인자 포함 개체 ( params )
+    3, 특정 작업에 대해 실행중인 모든 리졸버에 공유되는 개체
+      ~ 인증, db, 겟 등의 공용 정보 저장에 유용!
+    4, 필드이름, 루트에서 
+  */
   Query: {
+    // 기본적인 query
     movies: (_, { limit, rating }) => getMovies(limit, rating), // arr 리턴
     movie: (_, { id }) => getMovie(id),
     suggestions: (_, { id }) => getSuggestions(id),
+    // 에러 처리
+    givemeError: () => {
+      try {
+        throw "hello~";
+      } catch (err) {
+        console.log(err);
+        // 사용자정의
+        throw new ApolloError("ttt", "abc", { a: 123123 });
+        // 권한
+        throw new AuthenticationError(err);
+        // parameter
+        throw new UserInputError(err);
+      }
+    },
   },
   Mutation: {
     addMovie: function (_, { title, rating }) {
-      const newMovie = addMovie(title, rating);
-      if (newMovie) {
+      try {
+        const newMovie = addMovie(title, rating);
         const res: SuccessResopnse = {
           code: "200",
           message: "new movie creation success",
           movie: newMovie,
         };
         return res;
+      } catch (err) {
+        console.log(err);
       }
     },
   },
