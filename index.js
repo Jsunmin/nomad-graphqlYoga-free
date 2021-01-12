@@ -5,10 +5,18 @@ const server = new ApolloServer({
     // schema: 사용자에게 보내거나 받을 data에 대한 정의 (data form 통신? 정의)
     // typeDefs: 'graphql/schema.graphql',
     typeDefs: gql`
+        type justResponse {
+            code: String!
+            message: String!
+        }
         type Response {
             code: String!
             message: String!
             movie: Movie!
+        }
+
+        type Subscription {
+            movieDelete: justResponse!
         }
 
         type Movie {

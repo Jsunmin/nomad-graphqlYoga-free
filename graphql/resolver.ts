@@ -3,7 +3,25 @@ import {
   UserInputError,
   AuthenticationError,
   ApolloError,
+  PubSub,
 } from "apollo-server";
+
+const pubsub = new PubSub();
+const pubsubMsg = {
+  DELETE: "DELETE",
+  POST: "POST",
+};
+// 연결테스트!
+setInterval(() => {
+  console.log("sending payload");
+  pubsub.publish(pubsubMsg.DELETE, {
+    movieDelete: {
+      code: "400",
+      message: "hello subscriber!!",
+    },
+  });
+}, 2000);
+
 interface SuccessResopnse {
   code: string;
   message: string;
@@ -52,6 +70,12 @@ const resolver = {
       } catch (err) {
         console.log(err);
       }
+    },
+  },
+  Subscription: {
+    movieDelete: {
+      // Additional event labels can be passed to asyncIterator creation
+      subscribe: () => pubsub.asyncIterator([pubsubMsg.DELETE]),
     },
   },
 };
