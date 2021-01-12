@@ -32,14 +32,19 @@ const Response = objectType({
   },
 });
 
-// const Subscription = subscriptionType({
-//   definition(t) {
-//     t.field("movieDelete", {
-//       type: nonNull("JustResponse"),
-//       subscribe() {},
-//     });
-//   },
-// });
+const Subscription = subscriptionType({
+  definition(t) {
+    t.field("movieDelete", {
+      type: nonNull("JustResponse"),
+      subscribe() {
+        console.log("check??!");
+      },
+      resolve(eventData) {
+        return eventData;
+      },
+    });
+  },
+});
 
 const Movie = objectType({
   name: "Movie",
@@ -93,7 +98,7 @@ const Mutation = mutationType({
 });
 
 makeSchema({
-  types: [JustResponse, Response, Movie, Query, Mutation],
+  types: [JustResponse, Response, Movie, Query, Mutation, Subscription],
   outputs: {
     typegen: join(__dirname, "..", "nexus-typegen.ts"),
     schema: join(__dirname, "..", "schema.graphql"),
