@@ -1,11 +1,12 @@
 import { ApolloServer, gql } from 'apollo-server';
 import resolvers from './graphql/resolver';
+import _ from './graphql/schema'
 
 const server = new ApolloServer({
     // schema: 사용자에게 보내거나 받을 data에 대한 정의 (data form 통신? 정의)
     // typeDefs: 'graphql/schema.graphql',
     typeDefs: gql`
-        type justResponse {
+        type JustResponse {
             code: String!
             message: String!
         }
@@ -16,7 +17,7 @@ const server = new ApolloServer({
         }
 
         type Subscription {
-            movieDelete: justResponse!
+            movieDelete: JustResponse!
         }
 
         type Movie {
