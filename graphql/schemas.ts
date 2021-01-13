@@ -1,5 +1,4 @@
 import {
-  makeSchema,
   objectType,
   subscriptionType,
   queryType,
@@ -10,9 +9,8 @@ import {
   floatArg,
   intArg,
 } from "nexus";
-import { join } from "path";
 
-const JustResponse = objectType({
+export const JustResponse = objectType({
   name: "JustResponse",
   definition(t) {
     t.nonNull.string("code")!;
@@ -20,7 +18,7 @@ const JustResponse = objectType({
   },
 });
 
-const Response = objectType({
+export const Response = objectType({
   name: "Response",
   definition(t) {
     t.nonNull.string("code")!;
@@ -32,21 +30,18 @@ const Response = objectType({
   },
 });
 
-const Subscription = subscriptionType({
+export const Subscription = subscriptionType({
   definition(t) {
     t.field("movieDelete", {
       type: nonNull("JustResponse"),
       subscribe() {
         console.log("check??!");
       },
-      resolve(eventData) {
-        return eventData;
-      },
     });
   },
 });
 
-const Movie = objectType({
+export const Movie = objectType({
   name: "Movie",
   definition(t) {
     t.nonNull.int("id");
@@ -58,13 +53,13 @@ const Movie = objectType({
   },
 });
 
-const Query = queryType({
+export const Query = queryType({
   definition(t) {
     t.field("movies", {
       type: nonNull(list("Movie")),
       args: {
-        limit: nonNull(stringArg()),
-        rating: nonNull(floatArg()),
+        limit: stringArg(),
+        rating: floatArg(),
       },
     });
     t.field("movie", {
@@ -74,6 +69,7 @@ const Query = queryType({
       },
     });
     t.field("suggestions", {
+      // resolve(),
       type: nonNull(list("Movie")),
       args: {
         id: nonNull(intArg()),
@@ -85,7 +81,7 @@ const Query = queryType({
   },
 });
 
-const Mutation = mutationType({
+export const Mutation = mutationType({
   definition(t) {
     t.field("addMovie", {
       type: nonNull("Response"),
@@ -97,10 +93,4 @@ const Mutation = mutationType({
   },
 });
 
-makeSchema({
-  types: [JustResponse, Response, Movie, Query, Mutation, Subscription],
-  outputs: {
-    typegen: join(__dirname, "..", "nexus-typegen.ts"),
-    schema: join(__dirname, "..", "schema.graphql"),
-  },
-});
+

@@ -20,6 +20,7 @@ export const addMovie = (title, rating) => {
     return newMovie;
 }
 export const getMovies = async (limit, rating) => {
+    console.log(limit, rating, '?')
     const {
         data: {
             data: { movies }

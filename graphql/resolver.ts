@@ -11,22 +11,24 @@ const pubsubMsg = {
   DELETE: "DELETE",
   POST: "POST",
 };
-// 연결테스트!
-setInterval(() => {
-  console.log("sending payload");
-  pubsub.publish(pubsubMsg.DELETE, {
-    movieDelete: {
-      code: "400",
-      message: "hello subscriber!!",
-    },
-  });
-}, 2000);
-
 interface SuccessResopnse {
   code: string;
   message: string;
   movie: object;
-}
+};
+
+// 연결테스트!
+// setInterval(() => {
+//   console.log("sending payload");
+//   pubsub.publish(pubsubMsg.DELETE, {
+//     movieDelete: {
+//       code: "400",
+//       message: "hello subscriber!!",
+//     },
+//   });
+// }, 2000);
+
+
 // query를 resolve 하는 것 (해석?!)
 const resolver = {
   /* 총 4개의 인수 (parent, args, context, info)를 갖는데,
@@ -44,6 +46,7 @@ const resolver = {
     suggestions: (_, { id }) => getSuggestions(id),
     // 에러 처리
     givemeError: () => {
+      console.log('resolve not work')
       try {
         throw "hello~";
       } catch (err) {
