@@ -1,11 +1,13 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
+// 데이터베이스 연결 정의
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
+// prisma/client 생성을 지시
 generator client {
   provider = "prisma-client-js"
 }

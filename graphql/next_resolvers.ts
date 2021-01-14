@@ -85,7 +85,6 @@ export const Mutation = mutationType({
       },
       resolve: async function (_, { title, rating }) {
         try {
-          const msg = await sleep('sleep msg~ ', 2000);
           console.log("sending payload");
           pubsub.publish(pubsubMsg.DELETE, {
             movieDelete: {
@@ -93,8 +92,7 @@ export const Mutation = mutationType({
               message: "hello subscriber!!",
             },
           });
-          console.log(msg, 'go!');
-          const newMovie = addMovie(title, rating);
+          const newMovie = await addMovie(title, rating);
           const res: SuccessResopnse = {
             code: "200",
             message: "new movie creation success",
@@ -103,6 +101,7 @@ export const Mutation = mutationType({
           return res;
         } catch (err) {
           console.log(err);
+          throw new ApolloError(err.message, "500", { err });
         }
       },
     });
