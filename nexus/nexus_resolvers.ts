@@ -1,4 +1,4 @@
-import { getMovies, getMovie, getSuggestions, addMovie } from "./db";
+import { getMovies, getMovie, getSuggestions, addMovie } from "../graphql/db";
 import {
   subscriptionType,
   queryType,

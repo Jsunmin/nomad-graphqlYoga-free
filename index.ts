@@ -1,8 +1,9 @@
 import { ApolloServer } from 'apollo-server';
-import { schema } from './graphql/next'
+import { schema } from './nexus/nexus'
 
 const server = new ApolloServer({
     // schema: 사용자에게 보내거나 받을 data에 대한 정의 (data form 통신? 정의)
+    //   | typeDefs and resolvers (둘 다 필수값) 들을 사용자가 제시해주면, apolloserver가 알아서 schema를 만들어줌
     schema,
 });
 
