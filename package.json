@@ -4,8 +4,7 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "start": "npx babel-watch ./index.js --extensions '.ts,.js'",
-        "dev": "npx ts-node-dev --transpile-only --no-notify ./index.ts",
+        "start": "npx ts-node-dev --transpile-only --no-notify ./index.ts",
         "lint": "npx eslint . --ext .ts",
         "db:migrate": "npx prisma migrate dev --name init --preview-feature",
         "db:generate": "npx prisma generate"

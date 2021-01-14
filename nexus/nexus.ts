@@ -16,6 +16,6 @@ export const schema = makeSchema({
     },
     plugins: [ nexusPrisma({
       experimentalCRUD: true,
-      // prismaClient: PrismaClient,
+      prismaClient: PrismaClient.getInstance,
     }) ]
   });
