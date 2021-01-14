@@ -26,7 +26,8 @@
         "apollo-server": "^2.19.1",
         "axios": "^0.21.0",
         "graphql": "^15.4.0",
-        "nexus": "^1.0.0"
+        "nexus": "^1.0.0",
+        "nexus-plugin-prisma": "^0.28.0"
     },
     "devDependencies": {
         "@prisma/cli": "^2.14.0",

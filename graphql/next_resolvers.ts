@@ -32,7 +32,9 @@ interface SuccessResopnse {
 
 export const Query = queryType({
   definition(t) {
-    t.field("movies", {
+    t.crud.movie()
+    t.crud.movies()
+    t.field("getmovies", {
       type: nonNull(list("Movie")),
       args: {
         limit: intArg(),
@@ -40,7 +42,7 @@ export const Query = queryType({
       },
       resolve: (_, { limit, rating }: {limit: number, rating: number}) => getMovies(limit, rating), // arr 리턴
     });
-    t.field("movie", {
+    t.field("getmovie", {
       type: nonNull("Movie"),
       args: {
         id: nonNull(intArg()),
@@ -77,6 +79,11 @@ export const Query = queryType({
 
 export const Mutation = mutationType({
   definition(t) {
+    // using prisma-nexus
+    t.crud.createOneMovie();
+    t.crud.deleteOneMovie();
+    t.crud.updateOneMovie();
+    // using nexus
     t.field("addMovie", {
       type: nonNull("Response"),
       args: {

@@ -25,11 +25,11 @@ export const Response = objectType({
 export const Movie = objectType({
   name: "Movie",
   definition(t) {
-    t.nonNull.int("id");
-    t.nonNull.string("title");
-    t.nonNull.float("rating");
-    t.nonNull.string("summary");
-    t.nonNull.string("language");
-    t.nonNull.string("medium_cover_image");
+    t.model.id();
+    t.model.title();
+    t.model.rating();
+    t.model.summary();
+    t.model.language();
+    t.model.medium_cover_image();
   },
 });

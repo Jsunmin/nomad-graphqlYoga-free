@@ -1,5 +1,7 @@
-import { makeSchema } from "nexus";
 import { join } from "path";
+import { makeSchema } from "nexus";
+import { nexusPrisma } from 'nexus-plugin-prisma'
+import PrismaClient from '../prisma/prisma';
 import * as schemas from './next_schemas';
 import * as resolvers from './next_resolvers';
 // Nexus에서는 스키마와 리졸버가 항상 함께 정의됩니다. Nexus를 사용하면 모든 것을 공통 언어로 작성할 수 있습니다.
@@ -12,4 +14,8 @@ export const schema = makeSchema({
       typegen: join(__dirname, "..", "nexus-typegen.ts"),
       schema: join(__dirname, "..", "schema.graphql"),
     },
+    plugins: [ nexusPrisma({
+      experimentalCRUD: true,
+      // prismaClient: PrismaClient,
+    }) ]
   });
