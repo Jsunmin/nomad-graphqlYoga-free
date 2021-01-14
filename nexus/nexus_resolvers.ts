@@ -33,7 +33,10 @@ interface SuccessResopnse {
 export const Query = queryType({
   definition(t) {
     t.crud.movie()
-    t.crud.movies()
+    t.crud.movies({
+      ordering: true,
+      filtering: true,
+    })
     t.field("getmovies", {
       type: nonNull(list("Movie")),
       args: {

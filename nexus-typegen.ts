@@ -22,12 +22,42 @@ export interface NexusGenInputs {
   DateTimeFieldUpdateOperationsInput: { // input type
     set?: NexusGenScalars['DateTime'] | null; // DateTime
   }
+  DateTimeFilter: { // input type
+    equals?: NexusGenScalars['DateTime'] | null; // DateTime
+    gt?: NexusGenScalars['DateTime'] | null; // DateTime
+    gte?: NexusGenScalars['DateTime'] | null; // DateTime
+    in?: NexusGenScalars['DateTime'][] | null; // [DateTime!]
+    lt?: NexusGenScalars['DateTime'] | null; // DateTime
+    lte?: NexusGenScalars['DateTime'] | null; // DateTime
+    not?: NexusGenInputs['NestedDateTimeFilter'] | null; // NestedDateTimeFilter
+    notIn?: NexusGenScalars['DateTime'][] | null; // [DateTime!]
+  }
   FloatFieldUpdateOperationsInput: { // input type
     decrement?: number | null; // Float
     divide?: number | null; // Float
     increment?: number | null; // Float
     multiply?: number | null; // Float
     set?: number | null; // Float
+  }
+  FloatFilter: { // input type
+    equals?: number | null; // Float
+    gt?: number | null; // Float
+    gte?: number | null; // Float
+    in?: number[] | null; // [Float!]
+    lt?: number | null; // Float
+    lte?: number | null; // Float
+    not?: NexusGenInputs['NestedFloatFilter'] | null; // NestedFloatFilter
+    notIn?: number[] | null; // [Float!]
+  }
+  IntFilter: { // input type
+    equals?: number | null; // Int
+    gt?: number | null; // Int
+    gte?: number | null; // Int
+    in?: number[] | null; // [Int!]
+    lt?: number | null; // Int
+    lte?: number | null; // Int
+    not?: NexusGenInputs['NestedIntFilter'] | null; // NestedIntFilter
+    notIn?: number[] | null; // [Int!]
   }
   MovieCreateInput: { // input type
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
@@ -38,6 +68,16 @@ export interface NexusGenInputs {
     title: string; // String!
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
   }
+  MovieOrderByInput: { // input type
+    createdAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    id?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    language?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    medium_cover_image?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    rating?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    summary?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    title?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    updatedAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
+  }
   MovieUpdateInput: { // input type
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     language?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
@@ -47,15 +87,85 @@ export interface NexusGenInputs {
     title?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
   }
+  MovieWhereInput: { // input type
+    AND?: NexusGenInputs['MovieWhereInput'][] | null; // [MovieWhereInput!]
+    createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    id?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    language?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    medium_cover_image?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    NOT?: NexusGenInputs['MovieWhereInput'][] | null; // [MovieWhereInput!]
+    OR?: NexusGenInputs['MovieWhereInput'][] | null; // [MovieWhereInput!]
+    rating?: NexusGenInputs['FloatFilter'] | null; // FloatFilter
+    summary?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    title?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    updatedAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+  }
   MovieWhereUniqueInput: { // input type
     id?: number | null; // Int
+  }
+  NestedDateTimeFilter: { // input type
+    equals?: NexusGenScalars['DateTime'] | null; // DateTime
+    gt?: NexusGenScalars['DateTime'] | null; // DateTime
+    gte?: NexusGenScalars['DateTime'] | null; // DateTime
+    in?: NexusGenScalars['DateTime'][] | null; // [DateTime!]
+    lt?: NexusGenScalars['DateTime'] | null; // DateTime
+    lte?: NexusGenScalars['DateTime'] | null; // DateTime
+    not?: NexusGenInputs['NestedDateTimeFilter'] | null; // NestedDateTimeFilter
+    notIn?: NexusGenScalars['DateTime'][] | null; // [DateTime!]
+  }
+  NestedFloatFilter: { // input type
+    equals?: number | null; // Float
+    gt?: number | null; // Float
+    gte?: number | null; // Float
+    in?: number[] | null; // [Float!]
+    lt?: number | null; // Float
+    lte?: number | null; // Float
+    not?: NexusGenInputs['NestedFloatFilter'] | null; // NestedFloatFilter
+    notIn?: number[] | null; // [Float!]
+  }
+  NestedIntFilter: { // input type
+    equals?: number | null; // Int
+    gt?: number | null; // Int
+    gte?: number | null; // Int
+    in?: number[] | null; // [Int!]
+    lt?: number | null; // Int
+    lte?: number | null; // Int
+    not?: NexusGenInputs['NestedIntFilter'] | null; // NestedIntFilter
+    notIn?: number[] | null; // [Int!]
+  }
+  NestedStringFilter: { // input type
+    contains?: string | null; // String
+    endsWith?: string | null; // String
+    equals?: string | null; // String
+    gt?: string | null; // String
+    gte?: string | null; // String
+    in?: string[] | null; // [String!]
+    lt?: string | null; // String
+    lte?: string | null; // String
+    not?: NexusGenInputs['NestedStringFilter'] | null; // NestedStringFilter
+    notIn?: string[] | null; // [String!]
+    startsWith?: string | null; // String
   }
   StringFieldUpdateOperationsInput: { // input type
     set?: string | null; // String
   }
+  StringFilter: { // input type
+    contains?: string | null; // String
+    endsWith?: string | null; // String
+    equals?: string | null; // String
+    gt?: string | null; // String
+    gte?: string | null; // String
+    in?: string[] | null; // [String!]
+    lt?: string | null; // String
+    lte?: string | null; // String
+    not?: NexusGenInputs['NestedStringFilter'] | null; // NestedStringFilter
+    notIn?: string[] | null; // [String!]
+    startsWith?: string | null; // String
+  }
 }
 
 export interface NexusGenEnums {
+  SortOrder: "asc" | "desc"
 }
 
 export interface NexusGenScalars {
@@ -98,7 +208,7 @@ export interface NexusGenUnions {
 
 export type NexusGenRootTypes = NexusGenObjects
 
-export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
+export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars & NexusGenEnums
 
 export interface NexusGenFieldTypes {
   JustResponse: { // field return type
@@ -207,6 +317,8 @@ export interface NexusGenArgTypes {
       before?: NexusGenInputs['MovieWhereUniqueInput'] | null; // MovieWhereUniqueInput
       first?: number | null; // Int
       last?: number | null; // Int
+      orderBy?: NexusGenInputs['MovieOrderByInput'][] | null; // [MovieOrderByInput!]
+      where?: NexusGenInputs['MovieWhereInput'] | null; // MovieWhereInput
     }
     suggestions: { // args
       id: number; // Int!
@@ -224,7 +336,7 @@ export type NexusGenObjectNames = keyof NexusGenObjects;
 
 export type NexusGenInputNames = keyof NexusGenInputs;
 
-export type NexusGenEnumNames = never;
+export type NexusGenEnumNames = keyof NexusGenEnums;
 
 export type NexusGenInterfaceNames = never;
 
