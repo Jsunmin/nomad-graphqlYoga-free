@@ -2,6 +2,20 @@
 ### Do not make changes to this file directly
 
 
+scalar DateTime
+
+input DateTimeFieldUpdateOperationsInput {
+  set: DateTime
+}
+
+input FloatFieldUpdateOperationsInput {
+  decrement: Float
+  divide: Float
+  increment: Float
+  multiply: Float
+  set: Float
+}
+
 type JustResponse {
   code: String!
   message: String!
@@ -16,14 +30,43 @@ type Movie {
   title: String!
 }
 
+input MovieCreateInput {
+  createdAt: DateTime
+  language: String!
+  medium_cover_image: String!
+  rating: Float
+  summary: String!
+  title: String!
+  updatedAt: DateTime
+}
+
+input MovieUpdateInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  language: StringFieldUpdateOperationsInput
+  medium_cover_image: StringFieldUpdateOperationsInput
+  rating: FloatFieldUpdateOperationsInput
+  summary: StringFieldUpdateOperationsInput
+  title: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input MovieWhereUniqueInput {
+  id: Int
+}
+
 type Mutation {
   addMovie(rating: Int!, title: String!): Response!
+  createOneMovie(data: MovieCreateInput!): Movie!
+  deleteOneMovie(where: MovieWhereUniqueInput!): Movie
+  updateOneMovie(data: MovieUpdateInput!, where: MovieWhereUniqueInput!): Movie
 }
 
 type Query {
+  getmovie(id: Int!): Movie!
+  getmovies(limit: Int, rating: Float): [Movie]!
   givemeError: String
-  movie(id: Int!): Movie!
-  movies(limit: Int, rating: Float): [Movie]!
+  movie(where: MovieWhereUniqueInput!): Movie
+  movies(after: MovieWhereUniqueInput, before: MovieWhereUniqueInput, first: Int, last: Int): [Movie!]!
   suggestions(id: Int!): [Movie]!
 }
 
@@ -31,6 +74,10 @@ type Response {
   code: String!
   message: String!
   movie: Movie!
+}
+
+input StringFieldUpdateOperationsInput {
+  set: String
 }
 
 type Subscription {

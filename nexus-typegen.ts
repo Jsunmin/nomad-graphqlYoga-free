@@ -7,13 +7,52 @@
 
 
 
-
+declare global {
+  interface NexusGenCustomOutputProperties<TypeName extends string> {
+    crud: NexusPrisma<TypeName, 'crud'>
+    model: NexusPrisma<TypeName, 'model'>
+  }
+}
 
 declare global {
   interface NexusGen extends NexusGenTypes {}
 }
 
 export interface NexusGenInputs {
+  DateTimeFieldUpdateOperationsInput: { // input type
+    set?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  FloatFieldUpdateOperationsInput: { // input type
+    decrement?: number | null; // Float
+    divide?: number | null; // Float
+    increment?: number | null; // Float
+    multiply?: number | null; // Float
+    set?: number | null; // Float
+  }
+  MovieCreateInput: { // input type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    language: string; // String!
+    medium_cover_image: string; // String!
+    rating?: number | null; // Float
+    summary: string; // String!
+    title: string; // String!
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  MovieUpdateInput: { // input type
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    language?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    medium_cover_image?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    rating?: NexusGenInputs['FloatFieldUpdateOperationsInput'] | null; // FloatFieldUpdateOperationsInput
+    summary?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    title?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+  }
+  MovieWhereUniqueInput: { // input type
+    id?: number | null; // Int
+  }
+  StringFieldUpdateOperationsInput: { // input type
+    set?: string | null; // String
+  }
 }
 
 export interface NexusGenEnums {
@@ -25,6 +64,7 @@ export interface NexusGenScalars {
   Float: number
   Boolean: boolean
   ID: string
+  DateTime: any
 }
 
 export interface NexusGenObjects {
@@ -75,11 +115,16 @@ export interface NexusGenFieldTypes {
   }
   Mutation: { // field return type
     addMovie: NexusGenRootTypes['Response']; // Response!
+    createOneMovie: NexusGenRootTypes['Movie']; // Movie!
+    deleteOneMovie: NexusGenRootTypes['Movie'] | null; // Movie
+    updateOneMovie: NexusGenRootTypes['Movie'] | null; // Movie
   }
   Query: { // field return type
+    getmovie: NexusGenRootTypes['Movie']; // Movie!
+    getmovies: Array<NexusGenRootTypes['Movie'] | null>; // [Movie]!
     givemeError: string | null; // String
-    movie: NexusGenRootTypes['Movie']; // Movie!
-    movies: Array<NexusGenRootTypes['Movie'] | null>; // [Movie]!
+    movie: NexusGenRootTypes['Movie'] | null; // Movie
+    movies: NexusGenRootTypes['Movie'][]; // [Movie!]!
     suggestions: Array<NexusGenRootTypes['Movie'] | null>; // [Movie]!
   }
   Response: { // field return type
@@ -107,8 +152,13 @@ export interface NexusGenFieldTypeNames {
   }
   Mutation: { // field return type name
     addMovie: 'Response'
+    createOneMovie: 'Movie'
+    deleteOneMovie: 'Movie'
+    updateOneMovie: 'Movie'
   }
   Query: { // field return type name
+    getmovie: 'Movie'
+    getmovies: 'Movie'
     givemeError: 'String'
     movie: 'Movie'
     movies: 'Movie'
@@ -130,14 +180,33 @@ export interface NexusGenArgTypes {
       rating: number; // Int!
       title: string; // String!
     }
+    createOneMovie: { // args
+      data: NexusGenInputs['MovieCreateInput']; // MovieCreateInput!
+    }
+    deleteOneMovie: { // args
+      where: NexusGenInputs['MovieWhereUniqueInput']; // MovieWhereUniqueInput!
+    }
+    updateOneMovie: { // args
+      data: NexusGenInputs['MovieUpdateInput']; // MovieUpdateInput!
+      where: NexusGenInputs['MovieWhereUniqueInput']; // MovieWhereUniqueInput!
+    }
   }
   Query: {
-    movie: { // args
+    getmovie: { // args
       id: number; // Int!
     }
-    movies: { // args
+    getmovies: { // args
       limit?: number | null; // Int
       rating?: number | null; // Float
+    }
+    movie: { // args
+      where: NexusGenInputs['MovieWhereUniqueInput']; // MovieWhereUniqueInput!
+    }
+    movies: { // args
+      after?: NexusGenInputs['MovieWhereUniqueInput'] | null; // MovieWhereUniqueInput
+      before?: NexusGenInputs['MovieWhereUniqueInput'] | null; // MovieWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
     }
     suggestions: { // args
       id: number; // Int!
@@ -153,7 +222,7 @@ export interface NexusGenTypeInterfaces {
 
 export type NexusGenObjectNames = keyof NexusGenObjects;
 
-export type NexusGenInputNames = never;
+export type NexusGenInputNames = keyof NexusGenInputs;
 
 export type NexusGenEnumNames = never;
 
