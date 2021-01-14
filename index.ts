@@ -1,4 +1,4 @@
-import { ApolloServer, gql } from 'apollo-server';
+import { ApolloServer } from 'apollo-server';
 import { schema } from './graphql/next'
 
 const server = new ApolloServer({
