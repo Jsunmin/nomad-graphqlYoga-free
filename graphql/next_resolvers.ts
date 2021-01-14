@@ -38,7 +38,7 @@ export const Query = queryType({
         limit: intArg(),
         rating: floatArg(),
       },
-      resolve: (_, { limit, rating }) => getMovies(limit, rating), // arr 리턴
+      resolve: (_, { limit, rating }: {limit: number, rating: number}) => getMovies(limit, rating), // arr 리턴
     });
     t.field("movie", {
       type: nonNull("Movie"),
@@ -58,7 +58,7 @@ export const Query = queryType({
     t.field("givemeError", {
       type: "String",
       resolve: () => {
-        console.log('resolve not work')
+        console.log('resolve not work intentionally')
         try {
           throw "hello~";
         } catch (err) {
@@ -113,7 +113,7 @@ export const Subscription = subscriptionType({
     t.field("movieDelete", {
       type: nonNull("JustResponse"),
       async subscribe() {
-        console.log("check??!");
+        console.log("sub setting on!");
         const test = await pubsub.asyncIterator(pubsubMsg.DELETE);
         console.log(test);
         return test;
@@ -127,7 +127,7 @@ export const Subscription = subscriptionType({
   },
 });
 
-async function sleep(msg, ms) {
+async function sleep(msg: string, ms: number) {
   return new Promise(function(resolve, reject) {
     return setTimeout(() => {
       console.log('here! msg:');

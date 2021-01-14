@@ -46,7 +46,7 @@ const resolver = {
     suggestions: (_, { id }) => getSuggestions(id),
     // 에러 처리
     givemeError: () => {
-      console.log('resolve not work')
+      console.log('resolve not work intentionally')
       try {
         throw "hello~";
       } catch (err) {

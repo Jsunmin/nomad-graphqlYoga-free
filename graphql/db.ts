@@ -7,7 +7,7 @@ const MOVIE_DETAILS_URL = `${BASE_URL}movie_details.json`;
 const MOVIE_SUGGESTIONS_URL = `${BASE_URL}movie_suggestions.json`;
 
 // mutation용
-export const addMovie = async (title, rating) => {
+export const addMovie = async (title: string, rating: number) => {
     const prisma = Prisma.getInstance();
     const newMovie = await prisma.movie.create({
         data: {
@@ -20,7 +20,7 @@ export const addMovie = async (title, rating) => {
     });
     return newMovie;
 }
-export const getMovies = async (limit, rating) => {
+export const getMovies = async (limit: number, rating: number) => {
     const prisma = Prisma.getInstance();
     const [{
         data: {
@@ -38,7 +38,7 @@ export const getMovies = async (limit, rating) => {
     return [...fromDB, ...movies];
 }
 
-export const getMovie = async (id) => {
+export const getMovie = async (id: number) => {
     const {
         data: {
             data: { movie }
@@ -51,7 +51,7 @@ export const getMovie = async (id) => {
     return movie;
 }
 
-export const getSuggestions = async (id) => {
+export const getSuggestions = async (id: number) => {
     const {
         data: {
             data: { movies }
