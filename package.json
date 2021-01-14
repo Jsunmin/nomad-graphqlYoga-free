@@ -5,7 +5,7 @@
     "main": "index.js",
     "scripts": {
         "start": "npx babel-watch ./index.js --extensions '.ts,.js'",
-        "dev": "ts-node-dev --transpile-only --no-notify index.ts"
+        "dev": "ts-node-dev --transpile-only --no-notify ./index.ts"
     },
     "repository": {
         "type": "git",

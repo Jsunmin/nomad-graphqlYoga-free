@@ -1,47 +1,9 @@
 import { ApolloServer, gql } from 'apollo-server';
-import resolvers from './graphql/resolver';
-import { schema } from './graphql/schemas'
+import { schema } from './graphql/next'
 
 const server = new ApolloServer({
     // schema: 사용자에게 보내거나 받을 data에 대한 정의 (data form 통신? 정의)
     schema,
-    // typeDefs: gql`
-    //     type JustResponse {
-    //         code: String!
-    //         message: String!
-    //     }
-    //     type Response {
-    //         code: String!
-    //         message: String!
-    //         movie: Movie!
-    //     }
-
-    //     type Subscription {
-    //         movieDelete: JustResponse!
-    //     }
-
-    //     type Movie {
-    //         id: Int!
-    //         title: String!
-    //         rating: Float!
-    //         summary: String!
-    //         language: String!
-    //         medium_cover_image: String!
-    //     }
-        
-    //     type Query {
-    //         movies(limit: Int, rating: Float): [Movie]!
-    //         movie(id: Int!): Movie!
-    //         suggestions(id: Int!): [Movie]!
-    //         givemeError: String
-    //     }
-
-    //     type Mutation {
-    //         addMovie(title: String!, rating: Int!): Response!
-    //     }
-    // `,
-    // 요청을 처리(해석)하는 것 ~ query, mutation
-    resolvers,
 });
 
 server.listen().then(({ url }) => {
