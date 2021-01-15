@@ -1,29 +1,29 @@
 import {
   objectType,
-} from "nexus";
+} from 'nexus';
 
 export const JustResponse = objectType({
-  name: "JustResponse",
+  name: 'JustResponse',
   definition(t) {
-    t.nonNull.string("code");
-    t.nonNull.string("message");
+    t.nonNull.string('code');
+    t.nonNull.string('message');
   },
 });
 
 export const Response = objectType({
-  name: "Response",
+  name: 'Response',
   definition(t) {
-    t.nonNull.string("code");
-    t.nonNull.string("message");
+    t.nonNull.string('code');
+    t.nonNull.string('message');
     // 체크 movie 연결
-    t.nonNull.field("movie", {
-      type: "Movie",
+    t.nonNull.field('movie', {
+      type: 'Movie',
     });
   },
 });
 
 export const Movie = objectType({
-  name: "Movie",
+  name: 'Movie',
   definition(t) {
     t.model.id();
     t.model.title();
